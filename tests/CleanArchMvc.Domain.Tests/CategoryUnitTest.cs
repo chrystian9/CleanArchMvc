@@ -13,7 +13,7 @@ namespace CleanArchMvc.Domain.Tests
                 .NotThrow<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
         }
 
-        [Fact(DisplayName = "Create Category With Negative Value")]
+        [Fact(DisplayName = "Create Category With Negative Id Value")]
         public void CreateCategory_NegativeIdValue_DomainExceptionInvalidId()
         {
             Action action = () => new Category(-1, "Category Name");
