@@ -53,7 +53,7 @@ namespace CleanArchMvc.Domain.Tests
         }
 
         [Fact(DisplayName = "Create Product With Long Image Name")]
-        public void CreateProduct_LongImageName_DomainExceptionShortName()
+        public void CreateProduct_LongImageName_DomainExceptionLongImageName()
         {
             Action action = () => new Product(1, "Product Name", "Product Description", 9.99m, 99, "product image toooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong");
             action.Should()
@@ -62,10 +62,17 @@ namespace CleanArchMvc.Domain.Tests
         }
 
         [Fact(DisplayName = "Create Product With Null Image Name")]
-        public void CreateProduct_WithNullImagemName_DomainExceptionInvalidName()
+        public void CreateProduct_WithNullImagemName_NoDomainException()
         {
             Action action = () => new Product(1, "Product Name", "Product Description", 9.99m, 99, null);
             action.Should().NotThrow<CleanArchMvc.Domain.Validation.DomainExceptionValidation>();
+        }
+
+        [Fact(DisplayName = "Create Product With Null Image Name")]
+        public void CreateProduct_WithNullImagemName_NoNullReferenceException()
+        {
+            Action action = () => new Product(1, "Product Name", "Product Description", 9.99m, 99, null);
+            action.Should().NotThrow<NullReferenceException>();
         }
 
         [Theory(DisplayName = "Create Product With Invalid Stock Value")]
